@@ -37,16 +37,16 @@ header {
 }
 
 .logo-container {
-    margin-bottom: 50px; /* Ajuste o espaço entre a logo e o título se necessário */
+    margin-bottom: 20px; /* Reduziu o espaço abaixo da logo */
 }
 
 .logo {
-    width: 380px; /* Aumente a largura da logo */
+    max-width: 100%; /* Permite que a logo redimensione */
     height: auto; /* Mantém a proporção da imagem */
 }
 
 header h1 {
-    margin: 0;
+    margin: 10px 0 0; /* Adiciona espaço acima do título */
     font-size: 1.5rem; /* Tamanho relativo à base */
     text-align: center;
     color: white;
