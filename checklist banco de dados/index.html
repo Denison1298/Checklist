@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Texto para PDF e Word</title>
+    <title>Conversor de Currículo para PDF e Word</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
@@ -22,45 +22,45 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             text-align: center;
         }
 
         textarea {
             width: 100%;
-            height: 300px;
+            height: 400px;
             padding: 10px;
-            font-size: 14px;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            white-space: pre-wrap; /* Mantém a formatação do texto */
+            white-space: pre-wrap;
         }
 
         .buttons {
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         button {
-            padding: 15px 25px;
+            padding: 15px 30px;
             margin: 10px;
             font-size: 16px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #28a745;
+            background-color: #007bff;
             color: #fff;
         }
 
         button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Conversor de Texto</h1>
-        <textarea id="text-input" placeholder="Digite ou cole seu currículo aqui..."></textarea>
+        <h1>Conversor de Currículo</h1>
+        <textarea id="text-input" placeholder="Cole seu currículo aqui..."></textarea>
         <div class="buttons">
             <button onclick="convertToPDF()">Baixar PDF</button>
             <button onclick="convertToWord()">Baixar Word</button>
@@ -68,7 +68,6 @@
     </div>
 
     <script>
-        // Função para converter e baixar como PDF
         function convertToPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({
@@ -80,19 +79,16 @@
             let text = document.getElementById("text-input").value.trim();
 
             if (text === "") {
-                alert("Por favor, insira algum texto antes de baixar.");
+                alert("Por favor, insira seu currículo antes de baixar.");
                 return;
             }
 
-            // Definição de margens e fonte
             let marginLeft = 10;
             let marginTop = 20;
             let maxWidth = 180; 
             let lineHeight = 8;
 
-            // Quebra de linha automática para encaixar no formato A4
             let splitText = doc.splitTextToSize(text, maxWidth);
-
             splitText.forEach((line, index) => {
                 doc.text(line, marginLeft, marginTop + (index * lineHeight));
             });
@@ -100,16 +96,14 @@
             doc.save("curriculo.pdf");
         }
 
-        // Função para converter e baixar como arquivo Word (DOCX)
         function convertToWord() {
             let text = document.getElementById("text-input").value.trim();
-            
+
             if (text === "") {
-                alert("Por favor, insira algum texto antes de baixar.");
+                alert("Por favor, insira seu currículo antes de baixar.");
                 return;
             }
 
-            // Mantendo a formatação com quebras de linha
             let formattedText = text.replace(/\n/g, "<br>");
 
             let content = `<!DOCTYPE html>
