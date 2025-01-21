@@ -1,10 +1,20 @@
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("btn-pdf").addEventListener("click", downloadPDF);
+    document.getElementById("btn-word").addEventListener("click", downloadWord);
+});
+
 // Função para converter e baixar como PDF
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    let text = document.getElementById("text-input").value;
+    let text = document.getElementById("text-input").value.trim();
     
+    if (text === "") {
+        alert("Por favor, insira algum texto antes de baixar.");
+        return;
+    }
+
     // Ajuste de tamanho e quebra de linha automática
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
@@ -15,9 +25,13 @@ function downloadPDF() {
 
 // Função para converter e baixar como arquivo Word (DOCX)
 function downloadWord() {
-    let text = document.getElementById("text-input").value;
+    let text = document.getElementById("text-input").value.trim();
     
-    // Criação de um conteúdo formatado em Blob para Word
+    if (text === "") {
+        alert("Por favor, insira algum texto antes de baixar.");
+        return;
+    }
+
     let blob = new Blob(['\ufeff' + text], { type: "application/msword" });
 
     let link = document.createElement("a");
