@@ -22,18 +22,19 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             text-align: center;
         }
 
         textarea {
             width: 100%;
-            height: 200px;
+            height: 300px;
             padding: 10px;
-            font-size: 16px;
+            font-size: 14px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            white-space: pre-wrap; /* Mantém a formatação do texto */
         }
 
         .buttons {
@@ -59,7 +60,7 @@
 <body>
     <div class="container">
         <h1>Conversor de Texto</h1>
-        <textarea id="text-input" placeholder="Digite seu texto aqui..."></textarea>
+        <textarea id="text-input" placeholder="Digite ou cole seu currículo aqui..."></textarea>
         <div class="buttons">
             <button onclick="convertToPDF()">Baixar PDF</button>
             <button onclick="convertToWord()">Baixar Word</button>
@@ -83,22 +84,20 @@
                 return;
             }
 
-            // Configuração de fonte e tamanho
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(12);
-
-            // Quebra de linha automática para caber na página
+            // Definição de margens e fonte
             let marginLeft = 10;
             let marginTop = 20;
             let maxWidth = 180; 
             let lineHeight = 8;
+
+            // Quebra de linha automática para encaixar no formato A4
             let splitText = doc.splitTextToSize(text, maxWidth);
 
             splitText.forEach((line, index) => {
                 doc.text(line, marginLeft, marginTop + (index * lineHeight));
             });
 
-            doc.save("documento.pdf");
+            doc.save("curriculo.pdf");
         }
 
         // Função para converter e baixar como arquivo Word (DOCX)
@@ -110,17 +109,25 @@
                 return;
             }
 
+            // Mantendo a formatação com quebras de linha
+            let formattedText = text.replace(/\n/g, "<br>");
+
             let content = `<!DOCTYPE html>
             <html>
-                <head><meta charset="UTF-8"></head>
-                <body><pre>${text}</pre></body>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Currículo</title>
+                </head>
+                <body style="font-family: Arial, sans-serif; white-space: pre-wrap;">
+                    ${formattedText}
+                </body>
             </html>`;
 
             let blob = new Blob(['\ufeff' + content], { type: "application/msword" });
 
             let link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "documento.doc";
+            link.download = "curriculo.doc";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
