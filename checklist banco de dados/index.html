@@ -86,11 +86,19 @@
             let marginLeft = 10;
             let marginTop = 20;
             let maxWidth = 180; 
-            let lineHeight = 8;
-
+            let lineHeight = 10;
+            let pageHeight = doc.internal.pageSize.height - 20; // Ajuste de altura da página
+            
             let splitText = doc.splitTextToSize(text, maxWidth);
+            let cursorY = marginTop;
+
             splitText.forEach((line, index) => {
-                doc.text(line, marginLeft, marginTop + (index * lineHeight));
+                if (cursorY + lineHeight > pageHeight) {
+                    doc.addPage();
+                    cursorY = marginTop;
+                }
+                doc.text(line, marginLeft, cursorY);
+                cursorY += lineHeight;
             });
 
             doc.save("curriculo.pdf");
