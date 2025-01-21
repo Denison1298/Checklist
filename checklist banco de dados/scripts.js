@@ -1,22 +1,25 @@
-// Função para baixar como PDF
+// Função para converter e baixar como PDF
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
-    let doc = new jsPDF();
-    
+    const doc = new jsPDF();
+
     let text = document.getElementById("text-input").value;
     
-    // Adiciona o texto ao PDF, lidando com emojis e caracteres especiais
+    // Ajuste de tamanho e quebra de linha automática
     doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
     doc.text(text, 10, 20, { maxWidth: 180 });
 
     doc.save("documento.pdf");
 }
 
-// Função para baixar como Word (DOCX)
+// Função para converter e baixar como arquivo Word (DOCX)
 function downloadWord() {
     let text = document.getElementById("text-input").value;
-    let blob = new Blob(["\ufeff" + text], { type: "application/msword" });
     
+    // Criação de um conteúdo formatado em Blob para Word
+    let blob = new Blob(['\ufeff' + text], { type: "application/msword" });
+
     let link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "documento.doc";
