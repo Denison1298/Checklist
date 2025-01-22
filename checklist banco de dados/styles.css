@@ -1,3 +1,4 @@
+/* Estilização Geral */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -6,23 +7,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
+/* Container Principal */
 .container {
     background: #fff;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    max-width: 800px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    max-width: 600px;
     width: 100%;
 }
 
+/* Título */
 h1 {
     text-align: center;
     color: #333;
+    margin-bottom: 20px;
 }
 
+/* Formulário */
 form {
     display: flex;
     flex-direction: column;
@@ -35,39 +41,56 @@ label {
     color: #333;
 }
 
+/* Campos de Entrada */
 input, textarea {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 textarea {
     resize: none;
-    height: 100px;
+    height: 80px;
 }
 
+/* Campo de Upload de Foto */
 input[type="file"] {
     border: none;
+    padding: 5px;
 }
 
+/* Botões */
 .buttons {
     margin-top: 20px;
     text-align: center;
 }
 
 button {
-    padding: 15px 30px;
-    margin: 10px;
+    padding: 12px 20px;
     font-size: 16px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: #fff;
+    margin: 5px;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
