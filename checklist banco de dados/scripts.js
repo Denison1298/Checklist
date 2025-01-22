@@ -157,3 +157,66 @@ function generatePDF() {
         doc.save('curriculo.pdf');
     }
 }
+
+function generateWord() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const objective = document.getElementById('objective').value.trim();
+    const experience = document.getElementById('experience').value.trim();
+    const education = document.getElementById('education').value.trim();
+    const skills = document.getElementById('skills').value.trim();
+    const projects = document.getElementById('projects').value.trim();
+    const cnh = document.getElementById('cnh').value;
+
+    // Validar campos obrigatórios
+    if (!name || !email || !phone || !address) {
+        alert('Por favor, preencha todos os campos obrigatórios!');
+        return;
+    }
+
+    // Construção do conteúdo em HTML para o Word
+    const content = `
+        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+        <head>
+            <meta charset="utf-8">
+            <title>Currículo</title>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; }
+                h1 { text-align: center; color: #2c3e50; }
+                p { margin: 5px 0; }
+                strong { color: #34495e; }
+            </style>
+        </head>
+        <body>
+            <h1>Currículo</h1>
+            <p><strong>Nome:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Telefone:</strong> ${phone}</p>
+            <p><strong>Endereço:</strong> ${address}</p>
+            <p><strong>CNH:</strong> ${cnh || 'Não informada'}</p>
+            ${objective ? `<p><strong>Objetivo:</strong><br>${objective}</p>` : ''}
+            ${experience ? `<p><strong>Experiência Profissional:</strong><br>${experience}</p>` : ''}
+            ${education ? `<p><strong>Formação Acadêmica:</strong><br>${education}</p>` : ''}
+            ${skills ? `<p><strong>Habilidades:</strong><br>${skills}</p>` : ''}
+            ${projects ? `<p><strong>Projetos Pessoais:</strong><br>${projects}</p>` : ''}
+        </body>
+        </html>
+    `;
+
+    // Criar o Blob com o tipo correto para Word
+    const blob = new Blob(['\ufeff' + content], { type: 'application/msword' });
+
+    // Criar um link para download
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'curriculo.doc';
+
+    // Simular o clique para realizar o download
+    document.body.appendChild(link);
+    link.click();
+
+    // Remover o link após o download
+    document.body.removeChild(link);
+}
