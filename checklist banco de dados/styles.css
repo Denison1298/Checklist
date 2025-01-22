@@ -48,6 +48,10 @@ textarea {
     height: 100px;
 }
 
+input[type="file"] {
+    border: none;
+}
+
 .buttons {
     margin-top: 20px;
     text-align: center;
