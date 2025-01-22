@@ -423,8 +423,9 @@
                 </div>
                 <div class="form-btn form-btn--pdf">
                     <i class="swap"></i>
-                    <input data-type="pdf" type="button" value="Baixar CV" name="pdf" onclick="curriculumvitae.generatePdf(this);" title="Baixar CV">
-</div>
+                    <button type="button" onclick="generatePDF()" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i> Baixar PDF
+                </button>
                 <div class="form-btn form-btn--close" onclick="document.getElementById('preview-curriculum').classList.remove('preview-toggle')" aria-label="Fechar">
                     <i></i>
                     <span>Fechar</span>
