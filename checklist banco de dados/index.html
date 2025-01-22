@@ -3,137 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Currículo para PDF e Word</title>
+    <title>Gerador de Currículo</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-
-        textarea {
-            width: 100%;
-            height: 400px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            white-space: pre-wrap;
-        }
-
-        .buttons {
-            margin-top: 15px;
-        }
-
-        button {
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Conversor de Currículo</h1>
-        <textarea id="text-input" placeholder="Cole seu currículo aqui..."></textarea>
-        <div class="buttons">
-            <button onclick="convertToPDF()">Baixar PDF</button>
-            <button onclick="convertToWord()">Baixar Word</button>
-        </div>
+        <h1>Gerador de Currículo</h1>
+        <form id="resume-form">
+            <label for="name">Nome Completo</label>
+            <input type="text" id="name" placeholder="Digite seu nome completo" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Digite seu email" required>
+
+            <label for="phone">Telefone</label>
+            <input type="text" id="phone" placeholder="Digite seu telefone" required>
+
+            <label for="address">Endereço</label>
+            <input type="text" id="address" placeholder="Digite seu endereço" required>
+
+            <label for="objective">Objetivo</label>
+            <textarea id="objective" placeholder="Digite seu objetivo profissional"></textarea>
+
+            <label for="experience">Experiência Profissional</label>
+            <textarea id="experience" placeholder="Descreva sua experiência profissional"></textarea>
+
+            <label for="education">Formação Acadêmica</label>
+            <textarea id="education" placeholder="Descreva sua formação acadêmica"></textarea>
+
+            <label for="skills">Habilidades</label>
+            <textarea id="skills" placeholder="Liste suas habilidades"></textarea>
+
+            <div class="buttons">
+                <button type="button" onclick="generatePDF()">Baixar PDF</button>
+                <button type="button" onclick="generateWord()">Baixar Word</button>
+            </div>
+        </form>
     </div>
-
-    <script>
-        function convertToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({
-                orientation: "portrait",
-                unit: "mm",
-                format: "a4"
-            });
-
-            let text = document.getElementById("text-input").value.trim();
-
-            if (text === "") {
-                alert("Por favor, insira seu currículo antes de baixar.");
-                return;
-            }
-
-            let marginLeft = 10;
-            let marginTop = 20;
-            let maxWidth = 180; 
-            let lineHeight = 10;
-            let pageHeight = doc.internal.pageSize.height - 20; // Ajuste de altura da página
-            
-            let splitText = doc.splitTextToSize(text, maxWidth);
-            let cursorY = marginTop;
-
-            splitText.forEach((line, index) => {
-                if (cursorY + lineHeight > pageHeight) {
-                    doc.addPage();
-                    cursorY = marginTop;
-                }
-                doc.text(line, marginLeft, cursorY);
-                cursorY += lineHeight;
-            });
-
-            doc.save("curriculo.pdf");
-        }
-
-        function convertToWord() {
-            let text = document.getElementById("text-input").value.trim();
-
-            if (text === "") {
-                alert("Por favor, insira seu currículo antes de baixar.");
-                return;
-            }
-
-            let formattedText = text.replace(/\n/g, "<br>");
-
-            let content = `<!DOCTYPE html>
-            <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Currículo</title>
-                </head>
-                <body style="font-family: Arial, sans-serif; white-space: pre-wrap;">
-                    ${formattedText}
-                </body>
-            </html>`;
-
-            let blob = new Blob(['\ufeff' + content], { type: "application/msword" });
-
-            let link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "curriculo.doc";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
