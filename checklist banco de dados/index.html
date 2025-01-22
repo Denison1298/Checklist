@@ -3,73 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Currículo</title>
+    <title>Gerador de Currículo Profissional</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome (para ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Estilo Personalizado -->
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Gerador de Currículo Profissional</h1>
-        <form id="resume-form">
+<body class="bg-gray-100 min-h-screen flex justify-center items-start py-10">
+
+    <div class="container bg-white shadow-lg rounded-lg p-6 md:p-10 w-full max-w-4xl">
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
+            Gerador de Currículo Profissional
+        </h1>
+
+        <!-- Formulário -->
+        <form id="resume-form" class="space-y-6">
+
             <!-- Foto -->
-            <label for="photo">Foto (opcional)</label>
-            <input type="file" id="photo" accept="image/*">
-            <div class="photo-preview" id="photo-preview"></div>
+            <div class="mb-4">
+                <label for="photo" class="block text-gray-700 font-medium mb-2">
+                    Foto (opcional)
+                </label>
+                <input type="file" id="photo" class="form-control">
+                <div class="photo-preview mt-4 rounded-full w-24 h-24 border-2 border-gray-300 overflow-hidden mx-auto bg-gray-100">
+                    <img id="photo-preview" class="w-full h-full object-cover hidden">
+                </div>
+            </div>
 
             <!-- Nome -->
-            <label for="name">Nome Completo</label>
-            <input type="text" id="name" placeholder="Digite seu nome completo" required>
+            <div>
+                <label for="name" class="block text-gray-700 font-medium mb-2">Nome Completo</label>
+                <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" required>
+            </div>
 
             <!-- Email -->
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Digite seu email" required>
+            <div>
+                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="Digite seu email" required>
+            </div>
 
             <!-- Telefone -->
-            <label for="phone">Telefone</label>
-            <input type="text" id="phone" placeholder="Digite seu telefone" required>
+            <div>
+                <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
+                <input type="text" id="phone" class="form-control" placeholder="Digite seu telefone" required>
+            </div>
 
             <!-- Endereço -->
-            <label for="address">Endereço</label>
-            <input type="text" id="address" placeholder="Digite seu endereço" required>
+            <div>
+                <label for="address" class="block text-gray-700 font-medium mb-2">Endereço</label>
+                <input type="text" id="address" class="form-control" placeholder="Digite seu endereço" required>
+            </div>
 
             <!-- Objetivo -->
-            <label for="objective">Objetivo</label>
-            <textarea id="objective" placeholder="Digite seu objetivo profissional"></textarea>
+            <div>
+                <label for="objective" class="block text-gray-700 font-medium mb-2">Objetivo</label>
+                <textarea id="objective" class="form-control" rows="3" placeholder="Digite seu objetivo profissional"></textarea>
+            </div>
 
             <!-- Experiência -->
-            <label for="experience">Experiência Profissional</label>
-            <textarea id="experience" placeholder="Descreva sua experiência profissional"></textarea>
+            <div>
+                <label for="experience" class="block text-gray-700 font-medium mb-2">Experiência Profissional</label>
+                <textarea id="experience" class="form-control" rows="4" placeholder="Descreva sua experiência profissional"></textarea>
+            </div>
 
             <!-- Formação -->
-            <label for="education">Formação Acadêmica</label>
-            <textarea id="education" placeholder="Descreva sua formação acadêmica"></textarea>
+            <div>
+                <label for="education" class="block text-gray-700 font-medium mb-2">Formação Acadêmica</label>
+                <textarea id="education" class="form-control" rows="4" placeholder="Descreva sua formação acadêmica"></textarea>
+            </div>
 
             <!-- Habilidades -->
-            <label for="skills">Habilidades</label>
-            <textarea id="skills" placeholder="Liste suas habilidades"></textarea>
+            <div>
+                <label for="skills" class="block text-gray-700 font-medium mb-2">Habilidades</label>
+                <textarea id="skills" class="form-control" rows="3" placeholder="Liste suas habilidades"></textarea>
+            </div>
 
             <!-- Projetos -->
-            <label for="projects">Projetos Pessoais (opcional)</label>
-            <textarea id="projects" placeholder="Liste seus projetos e inclua links"></textarea>
+            <div>
+                <label for="projects" class="block text-gray-700 font-medium mb-2">Projetos Pessoais (opcional)</label>
+                <textarea id="projects" class="form-control" rows="3" placeholder="Liste seus projetos e inclua links"></textarea>
+            </div>
 
             <!-- Seleção de Template -->
-            <label for="template">Escolha o Template</label>
-            <select id="template">
-                <option value="modern">Moderno</option>
-                <option value="simple">Simples</option>
-                <option value="elegant">Elegante</option>
-            </select>
+            <div>
+                <label for="template" class="block text-gray-700 font-medium mb-2">Escolha o Template</label>
+                <select id="template" class="form-select">
+                    <option value="modern">Moderno</option>
+                    <option value="simple">Simples</option>
+                    <option value="elegant">Elegante</option>
+                </select>
+            </div>
 
             <!-- Botões -->
-            <div class="buttons">
-                <button type="button" onclick="previewResume()">Visualizar Currículo</button>
-                <button type="button" onclick="generatePDF()">Baixar PDF</button>
-                <button type="button" onclick="generateWord()">Baixar Word</button>
+            <div class="flex flex-wrap justify-center space-x-3 mt-6">
+                <button type="button" onclick="previewResume()" class="btn btn-outline-primary">
+                    <i class="fa-solid fa-eye"></i> Visualizar Currículo
+                </button>
+                <button type="button" onclick="generatePDF()" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i> Baixar PDF
+                </button>
+                <button type="button" onclick="generateWord()" class="btn btn-success">
+                    <i class="fa-solid fa-file-word"></i> Baixar Word
+                </button>
             </div>
         </form>
-        <!-- Área de visualização do currículo -->
-        <div class="resume-preview" id="resume-preview"></div>
+
+        <!-- Visualização do Currículo -->
+        <div id="resume-preview" class="resume-preview mt-8 bg-light p-4 border rounded-lg shadow-sm"></div>
     </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
