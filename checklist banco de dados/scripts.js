@@ -1,3 +1,4 @@
+// Função para gerar o PDF
 function generatePDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -12,6 +13,7 @@ function generatePDF() {
     const education = document.getElementById('education').value.trim();
     const skills = document.getElementById('skills').value.trim();
     const projects = document.getElementById('projects').value.trim();
+    const template = document.getElementById('template').value;
     const photoInput = document.getElementById('photo').files[0];
 
     // Validar campos obrigatórios
@@ -26,82 +28,88 @@ function generatePDF() {
         reader.onload = function (event) {
             const image = event.target.result;
             doc.addImage(image, 'JPEG', 10, 10, 30, 30); // Adiciona a foto no PDF
-            addContentToPDF(doc); // Adiciona o restante do conteúdo
+            addContentToPDF(doc, template); // Adiciona o restante do conteúdo
         };
         reader.readAsDataURL(photoInput);
     } else {
-        addContentToPDF(doc); // Se não houver foto, apenas adiciona o conteúdo
+        addContentToPDF(doc, template); // Se não houver foto, apenas adiciona o conteúdo
     }
 
-    // Função para adicionar conteúdo ao PDF
-    function addContentToPDF(doc) {
+    // Função para adicionar conteúdo ao PDF com base no template
+    function addContentToPDF(doc, template) {
         let cursorY = 50; // Ajusta o cursor após a foto (ou começa do topo se não houver foto)
         const lineHeight = 10;
 
-        doc.setFont('Arial', 'bold');
-        doc.setFontSize(18);
-        doc.text('Currículo', 105, cursorY, null, null, 'center');
-
-        cursorY += 15;
-        doc.setFontSize(12);
-        doc.setFont('Arial', 'normal');
-        doc.text(`Nome: ${name}`, 10, cursorY);
-        cursorY += lineHeight;
-        doc.text(`Email: ${email}`, 10, cursorY);
-        cursorY += lineHeight;
-        doc.text(`Telefone: ${phone}`, 10, cursorY);
-        cursorY += lineHeight;
-        doc.text(`Endereço: ${address}`, 10, cursorY);
-        cursorY += lineHeight * 2;
-
-        if (objective) {
+        // Template moderno
+        if (template === 'modern') {
             doc.setFont('Arial', 'bold');
-            doc.text('Objetivo:', 10, cursorY);
+            doc.setFontSize(18);
+            doc.text('Currículo Moderno', 105, cursorY, null, null, 'center');
+
+            cursorY += 15;
+            doc.setFontSize(12);
             doc.setFont('Arial', 'normal');
+            doc.text(`Nome: ${name}`, 10, cursorY);
             cursorY += lineHeight;
-            doc.text(objective, 10, cursorY);
+            doc.text(`Email: ${email}`, 10, cursorY);
+            cursorY += lineHeight;
+            doc.text(`Telefone: ${phone}`, 10, cursorY);
+            cursorY += lineHeight;
+            doc.text(`Endereço: ${address}`, 10, cursorY);
             cursorY += lineHeight * 2;
+
+            if (objective) {
+                doc.setFont('Arial', 'bold');
+                doc.text('Objetivo:', 10, cursorY);
+                doc.setFont('Arial', 'normal');
+                cursorY += lineHeight;
+                doc.text(objective, 10, cursorY, { maxWidth: 190 });
+                cursorY += lineHeight * 2;
+            }
+
+            if (experience) {
+                doc.setFont('Arial', 'bold');
+                doc.text('Experiência Profissional:', 10, cursorY);
+                doc.setFont('Arial', 'normal');
+                cursorY += lineHeight;
+                doc.text(experience, 10, cursorY, { maxWidth: 190 });
+                cursorY += lineHeight * 2;
+            }
+
+            if (education) {
+                doc.setFont('Arial', 'bold');
+                doc.text('Formação Acadêmica:', 10, cursorY);
+                doc.setFont('Arial', 'normal');
+                cursorY += lineHeight;
+                doc.text(education, 10, cursorY, { maxWidth: 190 });
+                cursorY += lineHeight * 2;
+            }
+
+            if (skills) {
+                doc.setFont('Arial', 'bold');
+                doc.text('Habilidades:', 10, cursorY);
+                doc.setFont('Arial', 'normal');
+                cursorY += lineHeight;
+                doc.text(skills, 10, cursorY, { maxWidth: 190 });
+                cursorY += lineHeight * 2;
+            }
+
+            if (projects) {
+                doc.setFont('Arial', 'bold');
+                doc.text('Projetos Pessoais:', 10, cursorY);
+                doc.setFont('Arial', 'normal');
+                cursorY += lineHeight;
+                doc.text(projects, 10, cursorY, { maxWidth: 190 });
+            }
         }
 
-        if (experience) {
-            doc.setFont('Arial', 'bold');
-            doc.text('Experiência Profissional:', 10, cursorY);
-            doc.setFont('Arial', 'normal');
-            cursorY += lineHeight;
-            doc.text(experience, 10, cursorY, { maxWidth: 190 });
-            cursorY += lineHeight * 2;
-        }
-
-        if (education) {
-            doc.setFont('Arial', 'bold');
-            doc.text('Formação Acadêmica:', 10, cursorY);
-            doc.setFont('Arial', 'normal');
-            cursorY += lineHeight;
-            doc.text(education, 10, cursorY, { maxWidth: 190 });
-            cursorY += lineHeight * 2;
-        }
-
-        if (skills) {
-            doc.setFont('Arial', 'bold');
-            doc.text('Habilidades:', 10, cursorY);
-            doc.setFont('Arial', 'normal');
-            cursorY += lineHeight;
-            doc.text(skills, 10, cursorY, { maxWidth: 190 });
-            cursorY += lineHeight * 2;
-        }
-
-        if (projects) {
-            doc.setFont('Arial', 'bold');
-            doc.text('Projetos Pessoais:', 10, cursorY);
-            doc.setFont('Arial', 'normal');
-            cursorY += lineHeight;
-            doc.text(projects, 10, cursorY, { maxWidth: 190 });
-        }
+        // Adicionar outros templates aqui (exemplo: elegante, simples)
 
         doc.save('curriculo.pdf');
     }
 }
 
+// Função para gerar o Word
 function generateWord() {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -163,7 +171,7 @@ document.getElementById("photo").addEventListener("change", function (event) {
     }
 });
 
-// Função para pré-visualizar o currículo
+// Função para pré-visualizar o currículo em tempo real
 function previewResume() {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -174,25 +182,25 @@ function previewResume() {
     const education = document.getElementById("education").value.trim();
     const skills = document.getElementById("skills").value.trim();
     const projects = document.getElementById("projects").value.trim();
-    const template = document.getElementById("template").value;
 
     const preview = document.getElementById("resume-preview");
 
-    // Exemplo básico de pré-visualização
+    // Template Moderno
     preview.innerHTML = `
-        <h3 class="text-center text-primary">${name}</h3>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Telefone:</strong> ${phone}</p>
-        <p><strong>Endereço:</strong> ${address}</p>
-        <h4>Objetivo</h4>
+        <div class="p-4 border-l-4 border-blue-500">
+            <h2 class="text-2xl font-bold text-blue-600">${name}</h2>
+            <p class="text-gray-600">${email} | ${phone}</p>
+            <p class="text-gray-600">${address}</p>
+        </div>
+        <h3 class="text-lg font-semibold mt-4 text-blue-500">Objetivo</h3>
         <p>${objective}</p>
-        <h4>Experiência Profissional</h4>
+        <h3 class="text-lg font-semibold mt-4 text-blue-500">Experiência Profissional</h3>
         <p>${experience}</p>
-        <h4>Formação Acadêmica</h4>
+        <h3 class="text-lg font-semibold mt-4 text-blue-500">Formação Acadêmica</h3>
         <p>${education}</p>
-        <h4>Habilidades</h4>
+        <h3 class="text-lg font-semibold mt-4 text-blue-500">Habilidades</h3>
         <p>${skills}</p>
-        <h4>Projetos Pessoais</h4>
+        <h3 class="text-lg font-semibold mt-4 text-blue-500">Projetos Pessoais</h3>
         <p>${projects}</p>
     `;
 
