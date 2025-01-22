@@ -144,3 +144,55 @@ function generateWord() {
     link.click();
     document.body.removeChild(link);
 }
+
+// Mostra a foto carregada no campo de upload
+document.getElementById("photo").addEventListener("change", function (event) {
+    const photoPreview = document.getElementById("photo-preview");
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            photoPreview.innerHTML = `<img src="${e.target.result}" alt="Foto do Currículo">`;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        photoPreview.innerHTML = ""; // Limpa a prévia se nenhuma foto for carregada
+    }
+});
+
+// Função para pré-visualizar o currículo
+function previewResume() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const objective = document.getElementById("objective").value.trim();
+    const experience = document.getElementById("experience").value.trim();
+    const education = document.getElementById("education").value.trim();
+    const skills = document.getElementById("skills").value.trim();
+    const projects = document.getElementById("projects").value.trim();
+    const photoPreview = document.getElementById("photo-preview").innerHTML;
+
+    const resumePreview = document.getElementById("resume-preview");
+
+    resumePreview.innerHTML = `
+        ${photoPreview}
+        <h2>${name}</h2>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Telefone:</strong> ${phone}</p>
+        <p><strong>Endereço:</strong> ${address}</p>
+        <h3>Objetivo</h3>
+        <p>${objective}</p>
+        <h3>Experiência Profissional</h3>
+        <p>${experience}</p>
+        <h3>Formação Acadêmica</h3>
+        <p>${education}</p>
+        <h3>Habilidades</h3>
+        <p>${skills}</p>
+        <h3>Projetos Pessoais</h3>
+        <p>${projects}</p>
+    `;
+
+    resumePreview.style.display = "block";
+}
