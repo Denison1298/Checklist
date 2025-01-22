@@ -1087,4 +1087,40 @@
     style="display:none"
     mode="production"
         ></sg-bhof></body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+  const curriculumvitae = {
+    generatePdf: function (buttonElement) {
+      // Importa a biblioteca jsPDF
+      const { jsPDF } = window.jspdf;
+
+      // Criando uma instância do jsPDF
+      const doc = new jsPDF();
+
+      // Adicionando conteúdo ao PDF
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.text("Currículo Vitae", 105, 20, { align: "center" });
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+      doc.text("Nome: João da Silva", 20, 40);
+      doc.text("E-mail: joao.silva@email.com", 20, 50);
+      doc.text("Telefone: (11) 99999-9999", 20, 60);
+      doc.text("Endereço: Rua das Flores, 123 - São Paulo, SP", 20, 70);
+
+      // Experiência profissional
+      doc.text("Experiência Profissional:", 20, 90);
+      doc.text("- Desenvolvedor Front-End na Empresa XYZ (2020 - 2023)", 20, 100);
+      doc.text("- Estágio em Desenvolvimento Web na Empresa ABC (2018 - 2020)", 20, 110);
+
+      // Educação
+      doc.text("Educação:", 20, 130);
+      doc.text("- Bacharel em Ciência da Computação - Universidade ABC (2016 - 2020)", 20, 140);
+
+      // Gerando e salvando o arquivo PDF
+      doc.save("curriculo.pdf");
+    }
+  };
+</script>
 </html>
