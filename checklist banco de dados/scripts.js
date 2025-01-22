@@ -147,17 +147,19 @@ function generateWord() {
 
 // Mostra a foto carregada no campo de upload
 document.getElementById("photo").addEventListener("change", function (event) {
-    const photoPreview = document.getElementById("photo-preview");
     const file = event.target.files[0];
+    const photoPreview = document.getElementById("photo-preview");
 
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            photoPreview.innerHTML = `<img src="${e.target.result}" alt="Foto do Currículo">`;
+            photoPreview.src = e.target.result;
+            photoPreview.classList.remove("hidden");
         };
         reader.readAsDataURL(file);
     } else {
-        photoPreview.innerHTML = ""; // Limpa a prévia se nenhuma foto for carregada
+        photoPreview.src = "";
+        photoPreview.classList.add("hidden");
     }
 });
 
@@ -172,27 +174,27 @@ function previewResume() {
     const education = document.getElementById("education").value.trim();
     const skills = document.getElementById("skills").value.trim();
     const projects = document.getElementById("projects").value.trim();
-    const photoPreview = document.getElementById("photo-preview").innerHTML;
+    const template = document.getElementById("template").value;
 
-    const resumePreview = document.getElementById("resume-preview");
+    const preview = document.getElementById("resume-preview");
 
-    resumePreview.innerHTML = `
-        ${photoPreview}
-        <h2>${name}</h2>
+    // Exemplo básico de pré-visualização
+    preview.innerHTML = `
+        <h3 class="text-center text-primary">${name}</h3>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Telefone:</strong> ${phone}</p>
         <p><strong>Endereço:</strong> ${address}</p>
-        <h3>Objetivo</h3>
+        <h4>Objetivo</h4>
         <p>${objective}</p>
-        <h3>Experiência Profissional</h3>
+        <h4>Experiência Profissional</h4>
         <p>${experience}</p>
-        <h3>Formação Acadêmica</h3>
+        <h4>Formação Acadêmica</h4>
         <p>${education}</p>
-        <h3>Habilidades</h3>
+        <h4>Habilidades</h4>
         <p>${skills}</p>
-        <h3>Projetos Pessoais</h3>
+        <h4>Projetos Pessoais</h4>
         <p>${projects}</p>
     `;
 
-    resumePreview.style.display = "block";
+    preview.style.display = "block";
 }
