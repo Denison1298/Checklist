@@ -14,6 +14,7 @@
             <!-- Foto -->
             <label for="photo">Foto (opcional)</label>
             <input type="file" id="photo" accept="image/*">
+            <div class="photo-preview" id="photo-preview"></div>
 
             <!-- Nome -->
             <label for="name">Nome Completo</label>
@@ -51,12 +52,23 @@
             <label for="projects">Projetos Pessoais (opcional)</label>
             <textarea id="projects" placeholder="Liste seus projetos e inclua links"></textarea>
 
+            <!-- Seleção de Template -->
+            <label for="template">Escolha o Template</label>
+            <select id="template">
+                <option value="modern">Moderno</option>
+                <option value="simple">Simples</option>
+                <option value="elegant">Elegante</option>
+            </select>
+
             <!-- Botões -->
             <div class="buttons">
+                <button type="button" onclick="previewResume()">Visualizar Currículo</button>
                 <button type="button" onclick="generatePDF()">Baixar PDF</button>
                 <button type="button" onclick="generateWord()">Baixar Word</button>
             </div>
         </form>
+        <!-- Área de visualização do currículo -->
+        <div class="resume-preview" id="resume-preview"></div>
     </div>
     <script src="scripts.js"></script>
 </body>
