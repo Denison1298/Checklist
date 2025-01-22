@@ -11,30 +11,47 @@
     <div class="container">
         <h1>Gerador de Currículo</h1>
         <form id="resume-form">
+            <!-- Foto -->
+            <label for="photo">Foto (opcional)</label>
+            <input type="file" id="photo" accept="image/*">
+
+            <!-- Nome -->
             <label for="name">Nome Completo</label>
             <input type="text" id="name" placeholder="Digite seu nome completo" required>
 
+            <!-- Email -->
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="Digite seu email" required>
 
+            <!-- Telefone -->
             <label for="phone">Telefone</label>
             <input type="text" id="phone" placeholder="Digite seu telefone" required>
 
+            <!-- Endereço -->
             <label for="address">Endereço</label>
             <input type="text" id="address" placeholder="Digite seu endereço" required>
 
+            <!-- Objetivo -->
             <label for="objective">Objetivo</label>
             <textarea id="objective" placeholder="Digite seu objetivo profissional"></textarea>
 
+            <!-- Experiência -->
             <label for="experience">Experiência Profissional</label>
             <textarea id="experience" placeholder="Descreva sua experiência profissional"></textarea>
 
+            <!-- Formação -->
             <label for="education">Formação Acadêmica</label>
             <textarea id="education" placeholder="Descreva sua formação acadêmica"></textarea>
 
+            <!-- Habilidades -->
             <label for="skills">Habilidades</label>
             <textarea id="skills" placeholder="Liste suas habilidades"></textarea>
 
+            <!-- Projetos -->
+            <label for="projects">Projetos Pessoais (opcional)</label>
+            <textarea id="projects" placeholder="Liste seus projetos e inclua links"></textarea>
+
+            <!-- Botões -->
             <div class="buttons">
                 <button type="button" onclick="generatePDF()">Baixar PDF</button>
                 <button type="button" onclick="generateWord()">Baixar Word</button>
