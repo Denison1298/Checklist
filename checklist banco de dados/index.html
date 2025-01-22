@@ -35,67 +35,58 @@
                 <label for="photo" class="block text-gray-700 font-medium mb-2">
                     Foto (opcional)
                 </label>
-                <input type="file" id="photo" class="form-control">
+                <input type="file" id="photo" class="form-control" accept="image/*" onchange="previewPhoto()">
                 <div class="photo-preview mt-4 rounded-full w-24 h-24 border-2 border-gray-300 overflow-hidden mx-auto bg-gray-100">
                     <img id="photo-preview" class="w-full h-full object-cover hidden">
                 </div>
             </div>
 
-            <!-- Nome -->
+            <!-- Campos do formulário -->
             <div>
                 <label for="name" class="block text-gray-700 font-medium mb-2">Nome Completo</label>
                 <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" required>
             </div>
 
-            <!-- Email -->
             <div>
                 <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
                 <input type="email" id="email" class="form-control" placeholder="Digite seu email" required>
             </div>
 
-            <!-- Telefone -->
             <div>
                 <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
                 <input type="text" id="phone" class="form-control" placeholder="Digite seu telefone" required>
             </div>
 
-            <!-- Endereço -->
             <div>
                 <label for="address" class="block text-gray-700 font-medium mb-2">Endereço</label>
                 <input type="text" id="address" class="form-control" placeholder="Digite seu endereço" required>
             </div>
 
-            <!-- Objetivo -->
             <div>
                 <label for="objective" class="block text-gray-700 font-medium mb-2">Objetivo</label>
                 <textarea id="objective" class="form-control" rows="3" placeholder="Digite seu objetivo profissional"></textarea>
             </div>
 
-            <!-- Experiência -->
             <div>
                 <label for="experience" class="block text-gray-700 font-medium mb-2">Experiência Profissional</label>
                 <textarea id="experience" class="form-control" rows="4" placeholder="Descreva sua experiência profissional"></textarea>
             </div>
 
-            <!-- Formação -->
             <div>
                 <label for="education" class="block text-gray-700 font-medium mb-2">Formação Acadêmica</label>
                 <textarea id="education" class="form-control" rows="4" placeholder="Descreva sua formação acadêmica"></textarea>
             </div>
 
-            <!-- Habilidades -->
             <div>
                 <label for="skills" class="block text-gray-700 font-medium mb-2">Habilidades</label>
                 <textarea id="skills" class="form-control" rows="3" placeholder="Liste suas habilidades"></textarea>
             </div>
 
-            <!-- Projetos -->
             <div>
                 <label for="projects" class="block text-gray-700 font-medium mb-2">Projetos Pessoais (opcional)</label>
                 <textarea id="projects" class="form-control" rows="3" placeholder="Liste seus projetos e inclua links"></textarea>
             </div>
 
-            <!-- CNH -->
             <div>
                 <label for="cnh" class="block text-gray-700 font-medium mb-2">CNH</label>
                 <select id="cnh" class="form-select">
