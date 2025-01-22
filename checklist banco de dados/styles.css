@@ -11,6 +11,15 @@ body {
     box-sizing: border-box;
 }
 
+/* Variáveis de cores */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --text-color: #2c3e50;
+    --background-color: #f9f9f9;
+    --border-color: #dfe6e9;
+}
+
 /* Container Principal */
 .container {
     background: #ffffff;
@@ -38,7 +47,7 @@ body {
 /* Título */
 h1 {
     text-align: center;
-    color: #2c3e50;
+    color: var(--text-color);
     font-size: 24px;
     margin-bottom: 25px;
     font-weight: 700;
@@ -64,9 +73,9 @@ input, textarea, select {
     width: 100%;
     padding: 12px 15px;
     font-size: 14px;
-    border: 1px solid #dfe6e9;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
     box-sizing: border-box;
     transition: all 0.3s ease-in-out;
 }
@@ -77,7 +86,7 @@ textarea {
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #007bff;
+    border-color: var(--primary-color);
     background-color: #ffffff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
     outline: none;
@@ -88,7 +97,7 @@ input[type="file"] {
     border: none;
     padding: 5px;
     font-size: 14px;
-    color: #2c3e50;
+    color: var(--text-color);
 }
 
 /* Prévia da Foto */
@@ -97,12 +106,12 @@ input[type="file"] {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: #f0f2f5;
+    background-color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border: 2px solid #dfe6e9;
+    border: 2px solid var(--border-color);
     margin-bottom: 20px;
     transition: transform 0.3s ease-in-out;
 }
@@ -129,7 +138,7 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 8px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: #ffffff;
     margin: 10px 5px;
     font-weight: bold;
@@ -138,7 +147,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: var(--secondary-color);
     box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
 }
 
@@ -150,12 +159,12 @@ button:active {
 .resume-preview {
     margin-top: 30px;
     padding: 25px;
-    background-color: #f9f9f9;
-    border: 1px solid #dfe6e9;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     display: none; /* Inicialmente escondido */
     font-size: 14px;
-    color: #2c3e50;
+    color: var(--text-color);
     line-height: 1.6;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
@@ -165,7 +174,7 @@ button:active {
     margin-top: 15px;
     color: #34495e;
     font-size: 18px;
-    border-bottom: 1px solid #dfe6e9;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 5px;
 }
 
@@ -190,16 +199,19 @@ button:active {
     }
 }
 
-/* Estilo personalizado para a prévia da foto */
-.photo-preview img {
-    display: block;
-}
-
-.photo-preview.hidden img {
-    display: none;
-}
-
-/* Ajuste para a visualização do currículo */
-.resume-preview {
-    display: none;
+/* Suporte a Modo Escuro */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #181a1b;
+        color: #f0f2f5;
+    }
+    .container {
+        background-color: #282c34;
+        color: #f0f2f5;
+    }
+    input, textarea, select {
+        background-color: #3c4043;
+        color: #f0f2f5;
+        border: 1px solid #5f6368;
+    }
 }
